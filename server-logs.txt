@@ -1,0 +1,30 @@
+Nov 21, 2024 12:53:38 PM server.ClientHandler run
+INFO: Peer joined: /127.0.0.1:60180
+Nov 21, 2024 12:53:38 PM server.ClientHandler run
+INFO: First peer in the network: /127.0.0.1:60180
+Nov 21, 2024 12:53:44 PM server.ClientHandler run
+INFO: Received command from /127.0.0.1:60180: quit
+Nov 21, 2024 12:53:44 PM server.ClientHandler run
+INFO: Peer disconnecting: /127.0.0.1:60180
+Nov 21, 2024 12:53:44 PM server.ClientHandler run
+INFO: Closed connection for peer: /127.0.0.1:60180
+Nov 21, 2024 1:07:44 PM server.ClientHandler run
+INFO: Peer joined: /127.0.0.1:60211
+Nov 21, 2024 1:07:44 PM server.ClientHandler run
+INFO: First peer in the network: /127.0.0.1:60211
+Nov 21, 2024 1:27:09 PM server.PeerHandler run
+INFO: Peer joined: /127.0.0.1:60258
+Nov 21, 2024 1:27:09 PM server.PeerHandler run
+INFO: First peer in the network: /127.0.0.1:60258
+Nov 21, 2024 2:27:11 PM server.PeerHandler run
+INFO: Peer joined: /127.0.0.1:60372
+Nov 21, 2024 2:27:11 PM server.PeerHandler run
+INFO: First peer in the network: /127.0.0.1:60372
+Nov 21, 2024 2:31:41 PM server.PeerHandler run
+INFO: Closed connection for peer: /127.0.0.1:60372
+Nov 21, 2024 2:32:49 PM server.PeerHandler run
+INFO: Peer joined: /127.0.0.1:60379
+Nov 21, 2024 2:32:49 PM server.PeerHandler run
+INFO: Sent random peer to /127.0.0.1:60379: /127.0.0.1:60372
+Nov 21, 2024 2:33:04 PM server.PeerHandler run
+INFO: Closed connection for peer: /127.0.0.1:60379

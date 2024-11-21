@@ -7,24 +7,13 @@ import java.util.logging.*;
 class PeerHandler implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(PeerHandler.class.getName());
 
-    //Logger filehandler: see server-logs.txt for output (ignore.lck file, it is removed after closing the server)
     static {
-        try {
-            FileHandler fileHandler = new FileHandler("server-logs.txt", true); // Append mode
-            fileHandler.setFormatter(new SimpleFormatter()); // Use a simple log format
-            LOGGER.addHandler(fileHandler);
-
-            Logger rootLogger = Logger.getLogger("");
-            rootLogger.removeHandler(rootLogger.getHandlers()[0]);
-
-            LOGGER.setLevel(Level.INFO);
-        } catch (IOException e) {
-            System.err.println("Failed to set up file handler for logger: " + e.getMessage());
-        }
+        initializeLogger();
     }
 
     private final Socket peerSocket;
 
+    //constructor
     public PeerHandler(Socket peerSocket) {
         this.peerSocket = peerSocket;
     }
@@ -84,6 +73,27 @@ class PeerHandler implements Runnable {
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Error closing client socket for peer: " + peerAddress, e);
             }
+        }
+    }
+
+    /**
+     * Initializes the logger for the ClientHandler class.
+     * <p>
+     * See server-logs.txt for output (ignore the server-logs.txt.lck file it is removed after the server shuts down
+     * </p>
+     */
+    private static void initializeLogger() {
+        try {
+            FileHandler fileHandler = new FileHandler("server-logs.txt", true); // Append mode
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
+
+            Logger rootLogger = Logger.getLogger("");
+            rootLogger.removeHandler(rootLogger.getHandlers()[0]); //removes logging in the server console
+
+            LOGGER.setLevel(Level.INFO);
+        } catch (IOException e) {
+            System.err.println("Failed to set up file handler for logger: " + e.getMessage());
         }
     }
 }

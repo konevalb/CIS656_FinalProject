@@ -7,11 +7,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Central_Server {
     static int serverPort = 9090;
+    //thread-safe ArrayList
     public static final List<InetSocketAddress> peerList = new CopyOnWriteArrayList<>();
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(serverPort)) {
             System.out.println("The Server is on!");
+            System.out.println("See server-logs.txt for logs");
 
             // Start a thread to listen for terminal commands
             new Thread(() -> handleServerCommands(serverSocket)).start();
@@ -19,8 +21,8 @@ public class Central_Server {
             // Main server loop to handle peer connections
             while (!serverSocket.isClosed()) {
                 try {
-                    Socket clientSocket = serverSocket.accept();
-                    new Thread(new ClientHandler(clientSocket)).start();
+                    Socket PeerSocket = serverSocket.accept();
+                    new Thread(new PeerHandler(PeerSocket)).start();
                 } catch (IOException e) {
                     if (serverSocket.isClosed()) {
                         System.out.println("Server shutting down...");
@@ -40,7 +42,7 @@ public class Central_Server {
     }
 
     /**
-     * Handles terminal commands (members/quit).
+     * Handles terminal commands <b>server side</b> (members/quit).
      *
      * @param serverSocket The main server socket.
      */
@@ -105,10 +107,10 @@ public class Central_Server {
      */
     public static synchronized InetSocketAddress getRandomPeer(InetSocketAddress excludingPeer) {
         List<InetSocketAddress> availablePeers = new ArrayList<>(peerList);
-        availablePeers.remove(excludingPeer); // Exclude the requesting peer
+        availablePeers.remove(excludingPeer); // Excluding the requesting peer
 
         if (availablePeers.isEmpty()) {
-            return null; // No other peers available
+            return null;
         }
 
         Random random = new Random();
