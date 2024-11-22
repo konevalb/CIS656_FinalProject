@@ -164,7 +164,7 @@ public class Peer {
 
             while (true) {
                 Socket clientSocket = peerServerSocket.accept();
-                threadPool.submit(() -> handleIncomingConnection(clientSocket));
+                threadPool.submit(() -> peerListener(clientSocket));
             }
         } catch (IOException e) {
             System.out.println("Error starting peer server: " + e.getMessage());
@@ -189,17 +189,17 @@ public class Peer {
     }
 
     /**
-     * Handles incoming peer connection requests.
+     * Listens for Peer connections requests and disconnects from peer upon receiving a disconnect request.
      *
-     * @param clientSocket The client socket for incoming peer connections
+     * @param peerSocket The peer socket for peer connections
      */
-    private static void handleIncomingConnection(Socket clientSocket) {
+    private static void peerListener(Socket peerSocket) {
         InetSocketAddress remoteAddress = null;
 
-        try (BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
+        try (BufferedReader input = new BufferedReader(new InputStreamReader(peerSocket.getInputStream()))) {
 
-            remoteAddress = new InetSocketAddress(clientSocket.getInetAddress(), clientSocket.getPort());
-            neighbors.put(remoteAddress, clientSocket);
+            remoteAddress = new InetSocketAddress(peerSocket.getInetAddress(), peerSocket.getPort());
+            neighbors.put(remoteAddress, peerSocket);
 
             System.out.println("Connected to peer: " + remoteAddress);
 
