@@ -15,7 +15,7 @@ This application implements a distributed peer-to-peer (P2P) system with a centr
     - `members`: Displays a list of all currently connected peers.
     - `quit`: Shuts down the central server (no new peers can join afterward).
 - **Note:**  
-  The Server does not track the topology of the peer network at the moment. Upon subsequent reconnects from Peers they are not saved to the internal List of Peers.
+  The  Server does not track the topology of the peer network at the moment. Upon subsequent reconnects from Peers they are not saved to the internal List of Peers.
 
 ---
 
